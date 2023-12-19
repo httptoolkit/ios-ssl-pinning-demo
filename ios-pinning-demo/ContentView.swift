@@ -1,24 +1,88 @@
-//
-//  ContentView.swift
-//  ios-pinning-demo
-//
-//  Created by Tim Perry on 19/12/23.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel = RequestViewModel()
+    
+    let SPACING = 15.0
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("SSL Pinning Demo")
+                .font(.largeTitle)
+                .padding(.top)
+            
+            GeometryReader { geometry in
+                ScrollView(.vertical) {
+                    VStack(spacing: SPACING) {
+                        ForEach(viewModel.requests) { request in
+                            RequestButtonView(request: request, viewModel: viewModel)
+                        }
+                    }
+                    .frame(
+                        minWidth: geometry.size.width - SPACING*2,
+                        minHeight: geometry.size.height - SPACING*2,
+                        alignment: .center
+                    )
+                    .padding(.horizontal)
+                }
+            }
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
+
+struct RequestButtonView: View {
+    @ObservedObject var request: HTTPRequest
+    var viewModel: RequestViewModel
+
+    var body: some View {
+        Button(action: {
+            viewModel.sendRequest(request)
+        }) {
+            HStack {
+                Spacer().frame(width: 16)
+                
+                if request.status == .success {
+                    Image(systemName: "checkmark.circle")
+                } else if request.status == .failure {
+                    Image(systemName: "xmark.circle")
+                } else {
+                    // Invisible placeholder to maintain alignment
+                    Image(systemName: "circle").opacity(0)
+                }
+
+                Spacer()
+
+                if request.isLoading {
+                    ProgressView()
+                } else {
+                    Text(request.name)
+                }
+
+                Spacer()
+                
+                // Matching placeholder, so we end up centered
+                Image(systemName: "circle").opacity(0)
+                Spacer().frame(width: 16)
+            }
+            .frame(maxWidth: .infinity, minHeight: 44)
+        }
+        .background(
+            request.status == .none
+                ? Color.purple
+            : request.status == .success
+                ? Color.green
+            // Failure:
+                : Color.red
+        )
+        .foregroundColor(.white)
+        .cornerRadius(8)
+    }
+}
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

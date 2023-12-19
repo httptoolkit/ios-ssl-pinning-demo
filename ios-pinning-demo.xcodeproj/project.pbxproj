@@ -7,18 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		226A678C2B32016F0060DF1A /* ios_pinning_demoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A678B2B32016F0060DF1A /* ios_pinning_demoApp.swift */; };
+		226A678C2B32016F0060DF1A /* PinningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A678B2B32016F0060DF1A /* PinningApp.swift */; };
 		226A678E2B32016F0060DF1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A678D2B32016F0060DF1A /* ContentView.swift */; };
 		226A67902B3201720060DF1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226A678F2B3201720060DF1A /* Assets.xcassets */; };
 		226A67932B3201720060DF1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226A67922B3201720060DF1A /* Preview Assets.xcassets */; };
+		226A679B2B32082C0060DF1A /* RequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A679A2B32082C0060DF1A /* RequestViewModel.swift */; };
+		226A679D2B320A680060DF1A /* PinningURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A679C2B320A680060DF1A /* PinningURLSessionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		226A67882B32016F0060DF1A /* ios-pinning-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-pinning-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		226A678B2B32016F0060DF1A /* ios_pinning_demoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_pinning_demoApp.swift; sourceTree = "<group>"; };
+		226A678B2B32016F0060DF1A /* PinningApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinningApp.swift; sourceTree = "<group>"; };
 		226A678D2B32016F0060DF1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		226A678F2B3201720060DF1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		226A67922B3201720060DF1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		226A67992B3206C70060DF1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		226A679A2B32082C0060DF1A /* RequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewModel.swift; sourceTree = "<group>"; };
+		226A679C2B320A680060DF1A /* PinningURLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinningURLSessionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +40,7 @@
 		226A677F2B32016F0060DF1A = {
 			isa = PBXGroup;
 			children = (
+				226A679C2B320A680060DF1A /* PinningURLSessionDelegate.swift */,
 				226A678A2B32016F0060DF1A /* ios-pinning-demo */,
 				226A67892B32016F0060DF1A /* Products */,
 			);
@@ -51,8 +57,10 @@
 		226A678A2B32016F0060DF1A /* ios-pinning-demo */ = {
 			isa = PBXGroup;
 			children = (
-				226A678B2B32016F0060DF1A /* ios_pinning_demoApp.swift */,
+				226A67992B3206C70060DF1A /* Info.plist */,
+				226A678B2B32016F0060DF1A /* PinningApp.swift */,
 				226A678D2B32016F0060DF1A /* ContentView.swift */,
+				226A679A2B32082C0060DF1A /* RequestViewModel.swift */,
 				226A678F2B3201720060DF1A /* Assets.xcassets */,
 				226A67912B3201720060DF1A /* Preview Content */,
 			);
@@ -137,8 +145,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226A679B2B32082C0060DF1A /* RequestViewModel.swift in Sources */,
 				226A678E2B32016F0060DF1A /* ContentView.swift in Sources */,
-				226A678C2B32016F0060DF1A /* ios_pinning_demoApp.swift in Sources */,
+				226A678C2B32016F0060DF1A /* PinningApp.swift in Sources */,
+				226A679D2B320A680060DF1A /* PinningURLSessionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,11 +285,13 @@
 				DEVELOPMENT_TEAM = 8LCZSXKVZY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ios-pinning-demo/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,11 +316,13 @@
 				DEVELOPMENT_TEAM = 8LCZSXKVZY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ios-pinning-demo/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
