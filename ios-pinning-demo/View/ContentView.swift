@@ -14,7 +14,15 @@ struct ContentView: View {
             GeometryReader { geometry in
                 ScrollView(.vertical) {
                     VStack(spacing: SPACING) {
-                        ForEach(viewModel.requests) { request in
+                        ForEach(viewModel.unpinnedRequests) { request in
+                            RequestButtonView(request: request, viewModel: viewModel)
+                        }
+                        
+                        Divider()
+                            .background(Color.gray)
+                            .padding(.horizontal)
+
+                        ForEach(viewModel.pinnedRequests) { request in
                             RequestButtonView(request: request, viewModel: viewModel)
                         }
                     }

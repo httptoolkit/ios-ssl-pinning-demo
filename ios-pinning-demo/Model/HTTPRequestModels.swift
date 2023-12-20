@@ -167,7 +167,7 @@ var trustKitInitialized = false
 class TrustKitPinnedHTTPRequest: SimpleHTTPRequest {
     
     init(name: String) {
-        super.init(name: name, url: "https://ecc256.badssl.com")
+        super.init(name: name, url: "https://ecc384.badssl.com")
     }
     
     override func buildSession() -> URLSession {
@@ -177,7 +177,7 @@ class TrustKitPinnedHTTPRequest: SimpleHTTPRequest {
                 kTSKSwizzleNetworkDelegates: false,
                 kTSKEnforcePinning: true,
                 kTSKPinnedDomains: [
-                    "ecc256.badssl.com": [
+                    "ecc384.badssl.com": [
                         kTSKPublicKeyHashes: [
                             "C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M=",
                             // A backup pin is required, so we add a dud:
