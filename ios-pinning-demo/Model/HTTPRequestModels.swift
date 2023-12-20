@@ -56,14 +56,18 @@ class SimpleHTTPRequest: BaseHTTPRequest {
         var urlRequest = URLRequest(url: url)
         urlRequest.timeoutInterval = 10
 
-        let session = URLSession(configuration: .default)
+        let session = buildSession()
 
         let (_, response) = try await session.data(for: urlRequest)
         return (response as! HTTPURLResponse).statusCode
     }
+    
+    func buildSession() -> URLSession {
+        return URLSession(configuration: .default)
+    }
 }
 
-class URLSessionPinnedRequest: BaseHTTPRequest {
+class URLSessionPinnedRequest: SimpleHTTPRequest {
     
     let pinnedCertificate: String
     
@@ -72,22 +76,15 @@ class URLSessionPinnedRequest: BaseHTTPRequest {
         super.init(name: name, url: url)
     }
     
-    override func performRequest() async throws -> Int {
-        let url = URL(string: url)!
-        
-        var urlRequest = URLRequest(url: url)
-        urlRequest.timeoutInterval = 10
-
+    override func buildSession() -> URLSession {
         let delegate = PinningURLSessionDelegate(pinnedCertificate: pinnedCertificate)
-        let session = URLSession(
+        return URLSession(
             configuration: .default,
             delegate: delegate,
             delegateQueue: nil
         )
-
-        let (_, response) = try await session.data(for: urlRequest)
-        return (response as! HTTPURLResponse).statusCode
     }
+    
 }
 
 class AlamofireBaseHTTPRequest: BaseHTTPRequest {
@@ -158,6 +155,44 @@ class AlamofirePinnedPKHTTPRequest: AlamofireBaseHTTPRequest {
         )]
         
         super.init(name: name, url: url, evaluators: evaluators)
+    }
+    
+}
+
+import TrustKit
+
+var trustKitInitialized = false
+
+class TrustKitPinnedHTTPRequest: SimpleHTTPRequest {
+    
+    init(name: String) {
+        super.init(name: name, url: "https://ecc256.badssl.com")
+    }
+    
+    override func buildSession() -> URLSession {
+        // Initialize when first clicked:
+        if (!trustKitInitialized) {
+            TrustKit.initSharedInstance(withConfiguration: [
+                kTSKSwizzleNetworkDelegates: false,
+                kTSKEnforcePinning: true,
+                kTSKPinnedDomains: [
+                    "ecc256.badssl.com": [
+                        kTSKPublicKeyHashes: [
+                            "C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M=",
+                            // A backup pin is required, so we add a dud:
+                            "ABCABCABCABCABCABCABCABCABCABCABCABCABCABCA="
+                        ]
+                    ]
+                ]
+            ])
+            trustKitInitialized = true
+        }
+        
+        return URLSession(
+            configuration: .default,
+            delegate: TrustKitURLSessionDelegate(),
+            delegateQueue: nil
+        )
     }
     
 }

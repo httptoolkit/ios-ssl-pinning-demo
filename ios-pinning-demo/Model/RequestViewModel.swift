@@ -32,6 +32,11 @@ class RequestViewModel: ObservableObject {
             name: "Alamofire PK pinning",
             url: "https://ecc384.badssl.com",
             pinnedKey: SecCertificateCopyKey(BundledCertificates.isrgRootCert)!
+        ),
+        
+        TrustKitPinnedHTTPRequest(
+            name: "TrustKit pinning"
+            // TrustKit uses global configuration, configured to pin ecc256.badssl.com
         )
     ]
     
