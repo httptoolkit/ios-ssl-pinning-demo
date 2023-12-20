@@ -1,4 +1,5 @@
 import Foundation
+import Alamofire
 
 class BaseHTTPRequest: Identifiable, ObservableObject {
     let id = UUID()
@@ -14,6 +15,8 @@ class BaseHTTPRequest: Identifiable, ObservableObject {
     }
     
     func run() async throws {
+        URLCache.shared.removeAllCachedResponses()
+        
         DispatchQueue.main.async {
             self.isLoading = true
             self.status = .none
@@ -46,10 +49,9 @@ class BaseHTTPRequest: Identifiable, ObservableObject {
     }
 }
 
-
 class SimpleHTTPRequest: BaseHTTPRequest {
     override func performRequest() async throws -> Int {
-        guard let url = URL(string: url) else { throw URLError(.badURL) }
+        let url = URL(string: url)!
         
         var urlRequest = URLRequest(url: url)
         urlRequest.timeoutInterval = 10
@@ -63,15 +65,15 @@ class SimpleHTTPRequest: BaseHTTPRequest {
 
 class URLSessionPinnedRequest: BaseHTTPRequest {
     
-    let pinnedCertificate: String?
+    let pinnedCertificate: String
     
-    init(name: String, url: String, pinnedCertificate: String? = nil) {
+    init(name: String, url: String, pinnedCertificate: String) {
         self.pinnedCertificate = pinnedCertificate
         super.init(name: name, url: url)
     }
     
     override func performRequest() async throws -> Int {
-        guard let url = URL(string: url) else { throw URLError(.badURL) }
+        let url = URL(string: url)!
         
         var urlRequest = URLRequest(url: url)
         urlRequest.timeoutInterval = 10
@@ -86,4 +88,76 @@ class URLSessionPinnedRequest: BaseHTTPRequest {
         let (_, response) = try await session.data(for: urlRequest)
         return (response as! HTTPURLResponse).statusCode
     }
+}
+
+class AlamofireBaseHTTPRequest: BaseHTTPRequest {
+    
+    let evaluators: [String: ServerTrustEvaluating]
+    
+    init(name: String, url: String, evaluators: [String: ServerTrustEvaluating]) {
+        self.evaluators = evaluators
+        super.init(name: name, url: url)
+    }
+    
+    override func performRequest() async throws -> Int {
+        // Disable all caching:
+        let configuration = URLSessionConfiguration.af.default
+        configuration.urlCache = nil
+
+        let session = Session(
+            configuration: configuration,
+            serverTrustManager: ServerTrustManager(
+                allHostsMustBeEvaluated: !self.evaluators.isEmpty,
+                evaluators: self.evaluators
+            )
+        )
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            session.request(self.url).response { response in
+                switch response.result {
+                    case .success:
+                        continuation.resume(returning: response.response!.statusCode)
+                    case .failure(let error):
+                        continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+}
+
+class AlamofireSimpleHTTPRequest: AlamofireBaseHTTPRequest {
+    
+    init(name: String, url: String) {
+        super.init(name: name, url: url, evaluators: [:])
+    }
+    
+}
+
+class AlamofirePinnedCertHTTPRequest: AlamofireBaseHTTPRequest {
+    
+    init(name: String, url: String, pinnedCertificate: SecCertificate) {
+        let evaluators = [URL(string: url)!.host!: PinnedCertificatesTrustEvaluator(
+            certificates: [pinnedCertificate],
+            acceptSelfSignedCertificates: false,
+            performDefaultValidation: true,
+            validateHost: true
+        )]
+        
+        super.init(name: name, url: url, evaluators: evaluators)
+    }
+    
+}
+
+class AlamofirePinnedPKHTTPRequest: AlamofireBaseHTTPRequest {
+    
+    init(name: String, url: String, pinnedKey: SecKey) {
+        let evaluators = [URL(string: url)!.host!: PublicKeysTrustEvaluator(
+            keys: [pinnedKey],
+            performDefaultValidation: true,
+            validateHost: true
+        )]
+        
+        super.init(name: name, url: url, evaluators: evaluators)
+    }
+    
 }

@@ -2,9 +2,9 @@ import Foundation
 import CryptoKit
 
 class PinningURLSessionDelegate: NSObject, URLSessionDelegate {
-    var pinnedCertificate: String?
+    var pinnedCertificate: String
 
-    init(pinnedCertificate: String?) {
+    init(pinnedCertificate: String) {
         self.pinnedCertificate = pinnedCertificate
     }
 
