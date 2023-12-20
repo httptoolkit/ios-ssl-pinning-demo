@@ -13,6 +13,7 @@
 		226A67932B3201720060DF1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226A67922B3201720060DF1A /* Preview Assets.xcassets */; };
 		226A679B2B32082C0060DF1A /* RequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A679A2B32082C0060DF1A /* RequestViewModel.swift */; };
 		226A679D2B320A680060DF1A /* PinningURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A679C2B320A680060DF1A /* PinningURLSessionDelegate.swift */; };
+		22B46E652B330E070031C568 /* HTTPRequestModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B46E642B330E070031C568 /* HTTPRequestModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		226A67992B3206C70060DF1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		226A679A2B32082C0060DF1A /* RequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewModel.swift; sourceTree = "<group>"; };
 		226A679C2B320A680060DF1A /* PinningURLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinningURLSessionDelegate.swift; sourceTree = "<group>"; };
+		22B46E642B330E070031C568 /* HTTPRequestModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				226A679A2B32082C0060DF1A /* RequestViewModel.swift */,
 				226A678F2B3201720060DF1A /* Assets.xcassets */,
 				226A67912B3201720060DF1A /* Preview Content */,
+				22B46E642B330E070031C568 /* HTTPRequestModels.swift */,
 			);
 			path = "ios-pinning-demo";
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				226A679B2B32082C0060DF1A /* RequestViewModel.swift in Sources */,
+				22B46E652B330E070031C568 /* HTTPRequestModels.swift in Sources */,
 				226A678E2B32016F0060DF1A /* ContentView.swift in Sources */,
 				226A678C2B32016F0060DF1A /* PinningApp.swift in Sources */,
 				226A679D2B320A680060DF1A /* PinningURLSessionDelegate.swift in Sources */,

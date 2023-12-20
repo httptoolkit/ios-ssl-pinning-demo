@@ -32,7 +32,7 @@ struct ContentView: View {
 
 
 struct RequestButtonView: View {
-    @ObservedObject var request: HTTPRequest
+    @ObservedObject var request: BaseHTTPRequest
     var viewModel: RequestViewModel
 
     var body: some View {
