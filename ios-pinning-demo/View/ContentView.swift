@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     @StateObject var viewModel = RequestViewModel()
     
     let SPACING = 15.0
@@ -38,8 +39,8 @@ struct ContentView: View {
     }
 }
 
-
 struct RequestButtonView: View {
+    
     @ObservedObject var request: BaseHTTPRequest
     var viewModel: RequestViewModel
 

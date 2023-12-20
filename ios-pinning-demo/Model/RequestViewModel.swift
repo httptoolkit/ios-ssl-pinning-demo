@@ -38,27 +38,13 @@ class RequestViewModel: ObservableObject {
         )
     ]
     
-    @Published var currentError: RequestError?
-
     func sendRequest(_ httpRequest: BaseHTTPRequest) {
         Task {
-            do {
-                try await httpRequest.run()
-            } catch {
-                DispatchQueue.main.async {
-                    self.currentError = RequestError(localizedDescription: error.localizedDescription)
-                    httpRequest.status = .failure
-                }
-            }
+            await httpRequest.run()
         }
     }
 }
 
 enum RequestStatus {
     case none, success, failure
-}
-
-struct RequestError: Identifiable, Error {
-    let id = UUID()
-    let localizedDescription: String
 }

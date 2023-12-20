@@ -2,9 +2,10 @@ import Foundation
 import Alamofire
 
 class BaseHTTPRequest: Identifiable, ObservableObject {
+    
     let id = UUID()
-    var name: String
-    var url: String
+    let name: String
+    let url: String
     
     @Published var isLoading = false
     @Published var status: RequestStatus = .none
@@ -14,7 +15,7 @@ class BaseHTTPRequest: Identifiable, ObservableObject {
         self.url = url
     }
     
-    func run() async throws {
+    func run() async {
         URLCache.shared.removeAllCachedResponses()
         
         DispatchQueue.main.async {
@@ -34,13 +35,12 @@ class BaseHTTPRequest: Identifiable, ObservableObject {
                 self.isLoading = false
             }
         } catch {
+            print("\(name) failed with: \(error)")
+            
             DispatchQueue.main.async {
                 self.isLoading = false
                 self.status = .failure
             }
-            
-            // Rethrow so the UI can show the failure details
-            throw error
         }
     }
 
