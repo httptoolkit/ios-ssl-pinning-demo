@@ -6,10 +6,25 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>example.com</key>
+			<key>amiusing.httptoolkit.tech</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
+			</dict>
+		</dict>
+		<key>NSPinnedDomains</key>
+		<dict>
+			<key>sha256.badssl.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<false/>
+				<key>NSPinnedCAIdentities</key>
+				<array>
+					<dict>
+						<key>SPKI-SHA256-BASE64</key>
+						<string>C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M=</string>
+					</dict>
+				</array>
 			</dict>
 		</dict>
 	</dict>

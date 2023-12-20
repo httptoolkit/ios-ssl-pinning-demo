@@ -2,11 +2,17 @@ import Foundation
 
 class RequestViewModel: ObservableObject {
     @Published var requests: [HTTPRequest] = [
-        HTTPRequest(name: "Plain HTTP", url: "http://example.com"),
-        HTTPRequest(name: "HTTPS", url: "https://example.com"),
+        // We use amiusing.httptoolkit.tech for unpinned requests:
+        HTTPRequest(name: "Plain HTTP request", url: "http://amiusing.httptoolkit.tech"),
+        HTTPRequest(name: "HTTPS request", url: "https://amiusing.httptoolkit.tech"),
+        
+        // We use sha256.badssl.com for config-pinned (in Info.plist NSPinnedDomains) requests:
+        HTTPRequest(name: "Config-pinned request", url: "https://sha256.badssl.com"),
+        
+        // We use ecc384.badssl.com for all manually-pinned requests:
         HTTPRequest(
-            name: "Certificate-pinned",
-            url: "https://sha256.badssl.com",
+            name: "URLSession-pinned request",
+            url: "https://ecc384.badssl.com",
             // Pinned against hash of raw PK data - fiddly to get it into the x509 format that would match Android:
             pinnedCertificate: "9Fk6HgfMnM7/vtnBHcUhg1b3gU2bIpSd50XmKZkMbGA="
         )
@@ -59,9 +65,6 @@ class HTTPRequest: Identifiable, ObservableObject {
             self.isLoading = true
             self.status = .none
         }
-
-        // We use a tiny sleep to ensure the spinner shows without any flicker
-        try await Task.sleep(nanoseconds: 100_000_000)
 
         do {
             let (_, response) = try await session.data(for: urlRequest)
