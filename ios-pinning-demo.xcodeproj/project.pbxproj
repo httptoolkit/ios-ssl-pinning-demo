@@ -42,7 +42,6 @@
 		226A677F2B32016F0060DF1A = {
 			isa = PBXGroup;
 			children = (
-				226A679C2B320A680060DF1A /* PinningURLSessionDelegate.swift */,
 				226A678A2B32016F0060DF1A /* ios-pinning-demo */,
 				226A67892B32016F0060DF1A /* Products */,
 			);
@@ -61,6 +60,7 @@
 			children = (
 				226A67992B3206C70060DF1A /* Info.plist */,
 				226A678B2B32016F0060DF1A /* PinningApp.swift */,
+				226A679C2B320A680060DF1A /* PinningURLSessionDelegate.swift */,
 				226A678D2B32016F0060DF1A /* ContentView.swift */,
 				226A679A2B32082C0060DF1A /* RequestViewModel.swift */,
 				226A678F2B3201720060DF1A /* Assets.xcassets */,
