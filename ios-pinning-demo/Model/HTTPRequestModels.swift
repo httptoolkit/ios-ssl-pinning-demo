@@ -55,6 +55,7 @@ class SimpleHTTPRequest: BaseHTTPRequest {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.timeoutInterval = 10
+        urlRequest.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData
 
         let session = buildSession()
 
