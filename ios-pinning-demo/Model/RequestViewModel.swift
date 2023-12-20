@@ -5,7 +5,8 @@ class RequestViewModel: ObservableObject {
         // We use amiusing.httptoolkit.tech for unpinned requests:
         SimpleHTTPRequest(name: "Plain HTTP", url: "http://amiusing.httptoolkit.tech"),
         SimpleHTTPRequest(name: "HTTPS", url: "https://amiusing.httptoolkit.tech"),
-        AlamofireSimpleHTTPRequest(name: "Alamofire HTTPS", url: "https://amiusing.httptoolkit.tech")
+        AlamofireSimpleHTTPRequest(name: "Alamofire HTTPS", url: "https://amiusing.httptoolkit.tech"),
+        AFNetworkingSimpleHTTPRequest(name: "AFNetworking HTTPS", url: "https://amiusing.httptoolkit.tech")
     ]
     
     @Published var pinnedRequests: [BaseHTTPRequest] = [
@@ -30,6 +31,12 @@ class RequestViewModel: ObservableObject {
             name: "Alamofire PK pinning",
             url: "https://ecc384.badssl.com",
             pinnedKey: SecCertificateCopyKey(BundledCertificates.isrgRootCert)!
+        ),
+        
+        AFNetworkingPinnedHTTPRequest(
+            name: "AFNetworking cert pinning",
+            url: "https://ecc384.badssl.com",
+            pinnedCertificate: BundledCertificates.isrgRootCert
         ),
         
         TrustKitPinnedHTTPRequest(

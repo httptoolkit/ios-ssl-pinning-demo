@@ -21,6 +21,7 @@
 		22F4324A2B335E3600866A21 /* TrustKitDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 22F432492B335E3600866A21 /* TrustKitDynamic */; };
 		22F4324C2B335E3600866A21 /* TrustKitStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 22F4324B2B335E3600866A21 /* TrustKitStatic */; };
 		22F432502B33675000866A21 /* TrustKitURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4324F2B33675000866A21 /* TrustKitURLSessionDelegate.swift */; };
+		22F432532B336F2500866A21 /* AFNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 22F432522B336F2500866A21 /* AFNetworking */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 				22F4324C2B335E3600866A21 /* TrustKitStatic in Frameworks */,
 				22F4324A2B335E3600866A21 /* TrustKitDynamic in Frameworks */,
 				22F432482B335E3600866A21 /* TrustKit in Frameworks */,
+				22F432532B336F2500866A21 /* AFNetworking in Frameworks */,
 				22B46E632B330D300031C568 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,6 +134,7 @@
 				22F432472B335E3600866A21 /* TrustKit */,
 				22F432492B335E3600866A21 /* TrustKitDynamic */,
 				22F4324B2B335E3600866A21 /* TrustKitStatic */,
+				22F432522B336F2500866A21 /* AFNetworking */,
 			);
 			productName = "ios-pinning-demo";
 			productReference = 226A67882B32016F0060DF1A /* ios-pinning-demo.app */;
@@ -164,6 +167,7 @@
 			packageReferences = (
 				22B46E612B330D300031C568 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				22F432462B335E3600866A21 /* XCRemoteSwiftPackageReference "TrustKit" */,
+				22F432512B336F2500866A21 /* XCRemoteSwiftPackageReference "AFNetworking" */,
 			);
 			productRefGroup = 226A67892B32016F0060DF1A /* Products */;
 			projectDirPath = "";
@@ -426,6 +430,14 @@
 				minimumVersion = 3.0.3;
 			};
 		};
+		22F432512B336F2500866A21 /* XCRemoteSwiftPackageReference "AFNetworking" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AFNetworking/AFNetworking.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -448,6 +460,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 22F432462B335E3600866A21 /* XCRemoteSwiftPackageReference "TrustKit" */;
 			productName = TrustKitStatic;
+		};
+		22F432522B336F2500866A21 /* AFNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22F432512B336F2500866A21 /* XCRemoteSwiftPackageReference "AFNetworking" */;
+			productName = AFNetworking;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

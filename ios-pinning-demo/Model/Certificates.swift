@@ -8,7 +8,6 @@ struct BundledCertificates {
         let filePath = Bundle.main.path(forResource: filename, ofType: "der")!
         let data = try! Data(contentsOf: URL(fileURLWithPath: filePath))
         let certificate = SecCertificateCreateWithData(nil, data as CFData)!
-        
         return certificate
     }
 }

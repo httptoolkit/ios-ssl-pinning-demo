@@ -1,5 +1,7 @@
 import Foundation
 import Alamofire
+import TrustKit
+import AFNetworking
 
 class BaseHTTPRequest: Identifiable, ObservableObject {
     
@@ -160,8 +162,6 @@ class AlamofirePinnedPKHTTPRequest: AlamofireBaseHTTPRequest {
     
 }
 
-import TrustKit
-
 var trustKitInitialized = false
 
 class TrustKitPinnedHTTPRequest: SimpleHTTPRequest {
@@ -196,4 +196,53 @@ class TrustKitPinnedHTTPRequest: SimpleHTTPRequest {
         )
     }
     
+}
+
+class AFNetworkingSimpleHTTPRequest: BaseHTTPRequest {
+    
+    override func performRequest() async throws -> Int {
+        let manager = buildManager()
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            manager.get("/", parameters: nil, headers: nil, progress: nil, success: { (task, responseObject) in
+                let httpResponse = task.response as! HTTPURLResponse
+                continuation.resume(returning: httpResponse.statusCode)
+            }, failure: { (task, error) in
+                continuation.resume(throwing: error)
+            })
+        }
+    }
+    
+    func buildManager() -> AFHTTPSessionManager {
+        let manager = AFHTTPSessionManager(
+            baseURL: URL(string: self.url)
+        )
+        manager.responseSerializer = AFHTTPResponseSerializer()
+        return manager
+    }
+
+}
+
+class AFNetworkingPinnedHTTPRequest: AFNetworkingSimpleHTTPRequest {
+    
+    let pinnedCertificate: SecCertificate
+    
+    init(name: String, url: String, pinnedCertificate: SecCertificate) {
+        self.pinnedCertificate = pinnedCertificate
+        super.init(name: name, url: url)
+    }
+    
+    override func buildManager() -> AFHTTPSessionManager {
+        let manager = super.buildManager()
+        
+        let securityPolicy = AFSecurityPolicy(pinningMode: .certificate)
+        securityPolicy.pinnedCertificates = Set(
+            [SecCertificateCopyData(self.pinnedCertificate)] as! [Data]
+        )
+        securityPolicy.validatesDomainName = true
+        manager.securityPolicy = securityPolicy
+        
+        return manager
+    }
+
 }
