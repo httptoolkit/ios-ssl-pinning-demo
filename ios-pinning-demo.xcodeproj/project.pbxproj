@@ -64,16 +64,12 @@
 		226A678A2B32016F0060DF1A /* ios-pinning-demo */ = {
 			isa = PBXGroup;
 			children = (
-				22F4323E2B3346A100866A21 /* isrg-root.der */,
+				22F432412B334EC000866A21 /* View */,
+				22F432402B334EBB00866A21 /* Model */,
 				226A67992B3206C70060DF1A /* Info.plist */,
-				226A678B2B32016F0060DF1A /* PinningApp.swift */,
-				226A679C2B320A680060DF1A /* PinningURLSessionDelegate.swift */,
-				226A678D2B32016F0060DF1A /* ContentView.swift */,
-				226A679A2B32082C0060DF1A /* RequestViewModel.swift */,
+				22F4323E2B3346A100866A21 /* isrg-root.der */,
 				226A678F2B3201720060DF1A /* Assets.xcassets */,
 				226A67912B3201720060DF1A /* Preview Content */,
-				22B46E642B330E070031C568 /* HTTPRequestModels.swift */,
-				22F4323A2B33380300866A21 /* Certificates.swift */,
 			);
 			path = "ios-pinning-demo";
 			sourceTree = "<group>";
@@ -84,6 +80,26 @@
 				226A67922B3201720060DF1A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		22F432402B334EBB00866A21 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				226A679C2B320A680060DF1A /* PinningURLSessionDelegate.swift */,
+				226A679A2B32082C0060DF1A /* RequestViewModel.swift */,
+				22B46E642B330E070031C568 /* HTTPRequestModels.swift */,
+				22F4323A2B33380300866A21 /* Certificates.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		22F432412B334EC000866A21 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				226A678B2B32016F0060DF1A /* PinningApp.swift */,
+				226A678D2B32016F0060DF1A /* ContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
