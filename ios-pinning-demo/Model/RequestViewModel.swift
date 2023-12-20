@@ -18,7 +18,7 @@ class RequestViewModel: ObservableObject {
         ),
         
         AlamofireSimpleHTTPRequest(
-            name: "Alamofire cert pinning",
+            name: "Alamofire HTTPS",
             url: "https://ecc384.badssl.com"
         ),
         
