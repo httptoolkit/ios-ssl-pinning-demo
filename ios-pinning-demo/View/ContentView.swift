@@ -46,7 +46,9 @@ struct RequestButtonView: View {
 
     var body: some View {
         Button(action: {
-            viewModel.sendRequest(request)
+            if (request.isAvailable()) {
+                viewModel.sendRequest(request)
+            }
         }) {
             HStack {
                 Spacer().frame(width: 16)
@@ -64,6 +66,11 @@ struct RequestButtonView: View {
 
                 if request.isLoading {
                     ProgressView()
+                } else if !request.isAvailable() {
+                    VStack {
+                        Text(request.name)
+                        Text("(Not available)")
+                    }
                 } else {
                     Text(request.name)
                 }
@@ -75,9 +82,12 @@ struct RequestButtonView: View {
                 Spacer().frame(width: 16)
             }
             .frame(maxWidth: .infinity, minHeight: 44)
+            .disabled(!request.isAvailable())
         }
         .background(
-            request.status == .none
+            request.isAvailable() == false
+                ? Color.gray
+            : request.status == .none
                 ? Color.purple
             : request.status == .success
                 ? Color.green

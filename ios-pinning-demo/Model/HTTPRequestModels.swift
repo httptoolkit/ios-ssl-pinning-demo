@@ -45,6 +45,10 @@ class BaseHTTPRequest: Identifiable, ObservableObject {
             }
         }
     }
+    
+    func isAvailable() -> Bool {
+        return true
+    }
 
     func performRequest() async throws -> Int {
         preconditionFailure("performRequest must be overloaded for each case")
@@ -79,13 +83,25 @@ class URLSessionPinnedRequest: SimpleHTTPRequest {
         super.init(name: name, url: url)
     }
     
+    override func isAvailable() -> Bool {
+        if #available(iOS 15.0, *) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     override func buildSession() -> URLSession {
-        let delegate = PinningURLSessionDelegate(pinnedCertificate: pinnedCertificate)
-        return URLSession(
-            configuration: .default,
-            delegate: delegate,
-            delegateQueue: nil
-        )
+        if #available(iOS 15.0, *) {
+            let delegate = PinningURLSessionDelegate(pinnedCertificate: pinnedCertificate)
+            return URLSession(
+                configuration: .default,
+                delegate: delegate,
+                delegateQueue: nil
+            )
+        } else {
+            fatalError("URLSessionPinnedRequest is not available before iOS 15")
+        }
     }
     
 }

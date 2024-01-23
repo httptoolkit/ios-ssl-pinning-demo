@@ -1,6 +1,7 @@
 import Foundation
 import CryptoKit
 
+@available(iOS 15.0, *)
 class PinningURLSessionDelegate: NSObject, URLSessionDelegate {
     var pinnedCertificate: String
 

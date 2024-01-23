@@ -18,11 +18,23 @@
 		22F4323B2B33380300866A21 /* Certificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4323A2B33380300866A21 /* Certificates.swift */; };
 		22F4323F2B3346A100866A21 /* isrg-root.der in Resources */ = {isa = PBXBuildFile; fileRef = 22F4323E2B3346A100866A21 /* isrg-root.der */; };
 		22F432482B335E3600866A21 /* TrustKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22F432472B335E3600866A21 /* TrustKit */; };
-		22F4324A2B335E3600866A21 /* TrustKitDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 22F432492B335E3600866A21 /* TrustKitDynamic */; };
 		22F4324C2B335E3600866A21 /* TrustKitStatic in Frameworks */ = {isa = PBXBuildFile; productRef = 22F4324B2B335E3600866A21 /* TrustKitStatic */; };
 		22F432502B33675000866A21 /* TrustKitURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F4324F2B33675000866A21 /* TrustKitURLSessionDelegate.swift */; };
 		22F432532B336F2500866A21 /* AFNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 22F432522B336F2500866A21 /* AFNetworking */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22F64AA42B6025F90093AC10 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		226A67882B32016F0060DF1A /* ios-pinning-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-pinning-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,7 +57,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F4324C2B335E3600866A21 /* TrustKitStatic in Frameworks */,
-				22F4324A2B335E3600866A21 /* TrustKitDynamic in Frameworks */,
 				22F432482B335E3600866A21 /* TrustKit in Frameworks */,
 				22F432532B336F2500866A21 /* AFNetworking in Frameworks */,
 				22B46E632B330D300031C568 /* Alamofire in Frameworks */,
@@ -123,6 +134,7 @@
 				226A67842B32016F0060DF1A /* Sources */,
 				226A67852B32016F0060DF1A /* Frameworks */,
 				226A67862B32016F0060DF1A /* Resources */,
+				22F64AA42B6025F90093AC10 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,7 +144,6 @@
 			packageProductDependencies = (
 				22B46E622B330D300031C568 /* Alamofire */,
 				22F432472B335E3600866A21 /* TrustKit */,
-				22F432492B335E3600866A21 /* TrustKitDynamic */,
 				22F4324B2B335E3600866A21 /* TrustKitStatic */,
 				22F432522B336F2500866A21 /* AFNetworking */,
 			);
@@ -261,7 +272,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -318,7 +329,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -345,7 +356,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -376,7 +387,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,11 +461,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 22F432462B335E3600866A21 /* XCRemoteSwiftPackageReference "TrustKit" */;
 			productName = TrustKit;
-		};
-		22F432492B335E3600866A21 /* TrustKitDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 22F432462B335E3600866A21 /* XCRemoteSwiftPackageReference "TrustKit" */;
-			productName = TrustKitDynamic;
 		};
 		22F4324B2B335E3600866A21 /* TrustKitStatic */ = {
 			isa = XCSwiftPackageProductDependency;
